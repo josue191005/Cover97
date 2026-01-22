@@ -1,0 +1,250 @@
+/* ======================
+   VARIABLES Y BASE
+   ====================== */
+:root {
+  --black: #0b0b0b;
+  --gray: #1c1c1c;
+  --white: #ffffff;
+  --accent: #f5c542;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--black);
+  color: var(--white);
+  line-height: 1.4;
+}
+
+/* ======================
+   HEADER
+   ====================== */
+.header {
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 1px solid var(--gray);
+}
+
+.brand {
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+}
+
+.slogan {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* ======================
+   SECCIONES
+   ====================== */
+.section-title {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.section-subtitle {
+  text-align: center;
+  font-size: 0.8rem;
+  opacity: 0.6;
+  margin-bottom: 1rem;
+}
+
+/* ======================
+   SERVICIOS
+   ====================== */
+.services {
+  padding: 1.5rem 1rem;
+}
+
+.services-carousel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-arrow {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 1.2rem;
+}
+
+.services-list {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.service-card {
+  min-width: 120px;
+  border: 1px solid var(--gray);
+  padding: 0.5rem;
+  text-align: center;
+  scroll-snap-align: center;
+}
+
+.service-image {
+  height: 70px;                 /* controla el alto visual */
+  width: 100%;
+  overflow: hidden;             /* CLAVE: evita desbordes */
+  background-color: var(--gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.service-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;            /* CLAVE: adapta sin deformar */
+  display: block;
+}
+
+
+.service-name {
+  font-size: 0.85rem;
+}
+
+.service-price {
+  font-size: 0.8rem;
+  color: var(--accent);
+}
+
+/* ======================
+   RESERVA
+   ====================== */
+.booking {
+  padding: 1.5rem 1rem;
+}
+
+.booking-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 0.75rem;
+  margin-bottom: 0.25rem;
+  opacity: 0.7;
+}
+
+input {
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--accent);
+  padding: 0.4rem 0;
+  color: var(--white);
+}
+
+input::placeholder {
+  color: rgba(255,255,255,0.5);
+}
+
+.btn-primary {
+  margin-top: 0.5rem;
+  padding: 0.6rem;
+  background-color: var(--accent);
+  color: var(--black);
+  border: none;
+  font-weight: 600;
+}
+.dropdown {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.dropdown button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.dropdown button:hover {
+  background: #000;
+  color: #fff;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ======================
+   FOOTER
+   ====================== */
+.footer {
+  padding: 1rem;
+  text-align: center;
+  border-top: 1px solid var(--gray);
+}
+
+.footer-text {
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 0.9rem;
+}
+
+/* ======================
+   ESCALADO A DESKTOP
+   ====================== */
+@media (min-width: 768px) {
+  body {
+    max-width: 420px;
+    margin: auto;
+  }
+}
+/* ======================
+   ESTILOS DE SELECCIÓN
+   ====================== */
+.service-card {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Clase que aplicaremos con JS cuando se seleccione */
+.service-card.selected {
+  border: 2px solid var(--accent); /* Borde Dorado */
+  box-shadow: 0 0 10px rgba(245, 197, 66, 0.4); /* Brillo sutil */
+  transform: translateY(-3px); /* Se levanta un poquito */
+}
+
+/* Opcional: un check visual */
+.service-card.selected::after {
+  content: "✔";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: var(--accent);
+  color: var(--black);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
