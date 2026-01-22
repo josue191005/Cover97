@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cover 97 | Eleva tu estilo</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Hoja de estilos principal -->
+  <link rel="stylesheet" href="styles_version02.css" />
+</head>
+<body>
+
+  <!-- ======================
+       HEADER / IDENTIDAD
+       ====================== -->
+  <header class="header">
+    <h1 class="brand">COVER 97</h1>
+    <span class="slogan">eleva tu estilo</span>
+  </header>
+
+  <main>
+
+    <!-- ======================
+         SECCIÓN: SERVICIOS
+         ====================== -->
+    <section class="services">
+      <h2 class="section-title">Elige tu servicio</h2>
+      <p class="section-subtitle">puedes elegir más de uno</p>
+
+      <!-- Carrusel simple (no automático) -->
+      <div class="services-carousel">
+        <button class="nav-arrow" aria-label="Servicio anterior">◀</button>
+
+        <ul class="services-list">
+          <!-- Servicio 1 -->
+          <li class="service-card">
+            <div class="service-image">
+                <img src="images/degradado.jpg" alt="Corte clásico">
+            </div>
+            <p class="service-name">corte</p>
+            <span class="service-price">S/ 25</span>
+          </li>
+
+          <!-- Servicio 2 -->
+          <li class="service-card">
+            <div class="service-image">
+                <img src="images/barba.png" alt="Corte clásico">
+            </div>
+            <p class="service-name">barba</p>
+            <span class="service-price">S/ 15</span>
+          </li>
+
+          <!-- Servicio 3 -->
+          <li class="service-card">
+            <div class="service-image">
+                <img src="images/tinte.jpg" alt="Corte clásico">
+            </div>
+            <p class="service-name">tinte</p>
+            <span class="service-price">S/ 40</span>
+          </li>
+
+            <!-- Servicio 4 -->
+          <li class="service-card">
+            <div class="service-image">
+                <img src="images/piercings.jpg" alt="Corte clásico">
+            </div>
+            <p class="service-name">piercing</p>
+            <span class="service-price">S/ 25</span>
+          </li>
+
+          <!-- Servicio 5 -->
+          <li class="service-card">
+            <div class="service-image">
+                <img src="images/tatto.jpg" alt="Corte clásico">
+            </div>
+            <p class="service-name">tatto</p>
+            <span class="service-price">S/ 15</span>
+          </li>
+
+          <!-- Servicio 6 -->
+          <li class="service-card">
+            <div class="service-image">
+                <img src="images/ondulacion.jpg" alt="Corte clásico">
+            </div>
+            <p class="service-name">ondulacion</p>
+            <span class="service-price">S/ 40</span>
+          </li>
+        </ul>
+
+        <button class="nav-arrow" aria-label="Servicio siguiente">▶</button>
+      </div>
+    </section>
+
+    <!-- ======================
+         SECCIÓN: RESERVA https://script.google.com/macros/s/AKfycbw28t4GgoY5tv1k48G3XQ_sUW4we2Y-UeSbpAzAbvOMeDBOAutJmHMp1Z-_Z1P_pnoS/exec
+         ====================== -->
+    <section class="booking">
+      <h2 class="section-title">Reserva tu cita</h2>
+
+      <form class="booking-form">
+
+        <!-- Día -->
+        <div class="form-group">
+          <label for="day">Día</label>
+          <input type="text" id="day" placeholder="Selecciona un día" readonly />
+          <div id="days-list" class="dropdown hidden"></div>
+        </div>
+
+        <!-- Hora -->
+        <div class="form-group">
+          <label for="time">Hora</label>
+          <input type="text" id="time" placeholder="Selecciona una hora" readonly />
+          <div id="hours-list" class="dropdown hidden"></div>
+        </div>
+
+        <!-- Nombre -->
+        <div class="form-group">
+          <label for="name">Nombre</label>
+          <input type="text" id="name" placeholder="Tu nombre" />
+        </div>
+
+        <!-- WhatsApp -->
+        <div class="form-group">
+          <label for="whatsapp">Whatsapp</label>
+          <input type="tel" id="whatsapp" placeholder="Número de contacto" />
+        </div>
+
+        <!-- Botón -->
+        <button type="submit" class="btn-primary">Reservar</button>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- ======================
+       FOOTER / REDES
+       ====================== -->
+  <footer class="footer">
+    <p class="footer-text">Síguenos!</p>
+    <div class="social-icons">
+      <span>f</span>
+      <span>ig</span>
+      <span>t</span>
+    </div>
+  </footer>
+
+  <!-- JS solo si es necesario -->
+  <script src="script_version03.js"></script>
+</body>
+</html>
