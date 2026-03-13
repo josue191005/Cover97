@@ -42,7 +42,7 @@
             font-family: var(--font-body);
             line-height: 1.6;
             overflow-x: hidden;
-            padding-bottom: 80px; /* Espacio para la barra flotante */
+            padding-bottom: 80px;
         }
 
         a { text-decoration: none; color: inherit; transition: var(--transition); }
@@ -128,25 +128,30 @@
         #hero p { font-size: 1.2rem; color: #ccc; margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
 
         /* =========================================
-           5. SERVICIOS (MEJORADO PARA MÓVIL)
+           5. LAYOUT: SERVICIOS Y FORMULARIO
            ========================================= */
-        .services { padding: 100px 0; background: var(--black); }
-
-        .services-carousel { display: flex; align-items: center; gap: 1rem; position: relative; }
-        .services-list {
-            display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory;
-            padding: 20px 5px; scrollbar-width: none;
+        .booking-section { padding: 100px 0; background: var(--black); position: relative; }
+        
+        .layout-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Móvil: 1 columna */
+            gap: 50px;
         }
-        .services-list::-webkit-scrollbar { display: none; }
+
+        /* SERVICIOS (Izquierda) */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
 
         .service-card {
-            min-width: 220px; background: var(--dark-gray);
+            background: var(--dark-gray);
             border: 1px solid rgba(255,255,255,0.05); border-radius: 8px;
-            overflow: hidden; scroll-snap-align: center; cursor: pointer;
+            overflow: hidden; cursor: pointer;
             transition: var(--transition); position: relative;
         }
 
-        /* Check de selección (Nuevo) */
         .check-icon {
             position: absolute; top: 10px; right: 10px; width: 28px; height: 28px;
             background: rgba(0,0,0,0.6); border: 2px solid #555; border-radius: 50%;
@@ -154,12 +159,14 @@
             z-index: 5; transition: all 0.2s; font-size: 14px;
         }
 
-        .service-card.selected { border: 2px solid var(--gold); box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
+        .service-card.selected { border: 2px solid var(--gold); box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); transform: translateY(-3px); }
         .service-card.selected .check-icon { background: var(--gold); border-color: var(--gold); color: #000; }
 
-        .service-image { height: 180px; width: 100%; overflow: hidden; }
-        .service-image img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); opacity: 0.8; }
-        .service-card.selected .service-image img { opacity: 1; }
+        /* Fotos más grandes */
+        .service-image { height: 220px; width: 100%; overflow: hidden; }
+        .service-image img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); opacity: 0.7; }
+        .service-card:hover .service-image img { opacity: 0.9; transform: scale(1.05); }
+        .service-card.selected .service-image img { opacity: 1; transform: scale(1.05); }
         
         .service-info { padding: 15px; text-align: center; }
         .service-name { 
@@ -168,26 +175,11 @@
         }
         .service-price { color: var(--gold); font-weight: 600; font-size: 1.1rem; }
 
-        .nav-arrow {
-            background: rgba(255,255,255,0.1); border: none; color: var(--gold);
-            width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
-            font-size: 1.2rem; flex-shrink: 0;
-        }
-
-        /* =========================================
-           6. FORMULARIO
-           ========================================= */
-        .booking { padding: 100px 0; background: var(--dark-gray); position: relative; }
-        .booking::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0);
-            background-size: 20px 20px; pointer-events: none;
-        }
-
+        /* FORMULARIO (Derecha) */
         .booking-form {
-            max-width: 500px; margin: 0 auto; background: var(--black);
-            padding: 40px; border-radius: 10px; box-shadow: var(--shadow);
-            border: 1px solid rgba(212, 175, 55, 0.1); position: relative; z-index: 2;
+            background: var(--dark-gray); padding: 40px; border-radius: 10px; 
+            box-shadow: var(--shadow); border: 1px solid rgba(212, 175, 55, 0.1); 
+            position: sticky; top: 100px;
         }
 
         .form-group { margin-bottom: 1.5rem; }
@@ -197,16 +189,15 @@
         }
 
         input {
-            width: 100%; background: transparent; border: none; border-bottom: 1px solid #333;
+            width: 100%; background: transparent; border: none; border-bottom: 1px solid #444;
             padding: 10px 0; color: var(--text-main); font-family: var(--font-body);
             font-size: 1rem; outline: none; transition: var(--transition);
         }
         input:focus { border-bottom-color: var(--gold); }
 
-        /* Dropdown Estilizado */
         .dropdown { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
         .dropdown button {
-            background: var(--dark-gray); border: 1px solid #444; color: #ccc;
+            background: #111; border: 1px solid #333; color: #ccc;
             padding: 10px 15px; border-radius: 4px; cursor: pointer; font-size: 0.9rem;
             transition: var(--transition); flex-grow: 1; text-align: center;
         }
@@ -216,9 +207,9 @@
         .hidden { display: none; }
 
         /* =========================================
-           7. UBICACIÓN & FOOTER
+           6. UBICACIÓN & FOOTER
            ========================================= */
-        #ubicacion { padding: 100px 0; background: var(--black); }
+        #ubicacion { padding: 100px 0; background: #0a0a0a; }
         .info-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; }
         .map-box {
             height: 350px; background: #222; border-radius: 10px; overflow: hidden;
@@ -238,7 +229,7 @@
         .social-icons a:hover { background: var(--gold); color: var(--black); }
 
         /* =========================================
-           8. BARRA FLOTANTE (NUEVO PARA UX MÓVIL)
+           7. BARRA FLOTANTE (UX MÓVIL)
            ========================================= */
         .sticky-bar {
             position: fixed; bottom: 0; left: 0; width: 100%;
@@ -258,17 +249,22 @@
 
         /* Responsive */
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @media(min-width: 768px) {
+        
+        @media(min-width: 992px) { /* PC - 2 Columnas */
+            .layout-grid { grid-template-columns: 1.2fr 0.8fr; align-items: start; }
             #hero h1 { font-size: 6rem; }
             .info-grid { grid-template-columns: 1fr 1fr; }
             .hamburger { display: none; }
+            .section-title.left { text-align: left; }
+            .section-subtitle.left { text-align: left; }
         }
-        @media(max-width: 768px) {
+        
+        @media(max-width: 991px) { /* Móvil / Tablet */
             .nav-links { display: none; position: absolute; top: 80px; background: var(--black); flex-direction: column; width: 100%; padding: 20px; text-align: center; }
             .nav-links.active { display: flex; }
             .hamburger { display: block; }
             #hero h1 { font-size: 3.5rem; }
-            .service-card { min-width: 180px; }
+            .service-image { height: 180px; }
         }
     </style>
 </head>
@@ -278,10 +274,10 @@
         <div class="container navbar">
             <a href="#" class="logo">COVER<span>97</span></a>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#hero">Inicio</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#reserva">Reservar</a></li>
-                <li><a href="#ubicacion">Ubicación</a></li>
+                <li><a href="#hero" onclick="toggleMenu()">Inicio</a></li>
+                <li><a href="#reserva" onclick="toggleMenu()">Servicios</a></li>
+                <li><a href="#formulario-reserva" onclick="toggleMenu()">Reservar</a></li>
+                <li><a href="#ubicacion" onclick="toggleMenu()">Ubicación</a></li>
             </ul>
             <div class="hamburger" onclick="toggleMenu()">
                 <i class="fa-solid fa-bars"></i>
@@ -294,104 +290,111 @@
             <span class="hero-badge">Estilo Urbano & Premium</span>
             <h1>Eleva tu <br><span>Estilo</span></h1>
             <p>Más que un corte, una experiencia. Profesionales dedicados a perfeccionar tu imagen.</p>
-            <a href="#servicios" class="btn btn-primary">Empezar <i class="fa-solid fa-arrow-down" style="margin-left:8px"></i></a>
+            <a href="#reserva" class="btn btn-primary">Empezar <i class="fa-solid fa-arrow-down" style="margin-left:8px"></i></a>
         </div>
     </section>
 
-    <section id="servicios" class="services">
-        <div class="container">
-            <h2 class="section-title">Nuestros Servicios</h2>
-            <p class="section-subtitle">Toca para seleccionar uno o más servicios</p>
-
-            <div class="services-carousel">
-                <button class="nav-arrow prev">◀</button>
-                <ul class="services-list">
-                    <li class="service-card" onclick="toggleService(this, 'Corte', 25)">
+    <section id="reserva" class="booking-section">
+        <div class="container layout-grid">
+            
+            <div class="services-column">
+                <h2 class="section-title left" style="font-size: 2.5rem;">Nuestros Servicios</h2>
+                <p class="section-subtitle left" style="margin-bottom: 2rem;">Toca para seleccionar uno o más servicios</p>
+                
+                <div class="services-grid">
+                    <div class="service-card" onclick="toggleService(this, 'Corte', 25)">
                         <div class="check-icon"><i class="fa-solid fa-check"></i></div>
                         <div class="service-image"><img src="https://images.unsplash.com/photo-1593702295094-aea8c5c13d7b?w=500" alt="Corte"></div>
                         <div class="service-info">
                             <p class="service-name">Corte</p>
                             <span class="service-price">S/ 25</span>
                         </div>
-                    </li>
-                    <li class="service-card" onclick="toggleService(this, 'Barba', 15)">
+                    </div>
+                    
+                    <div class="service-card" onclick="toggleService(this, 'Barba', 15)">
                         <div class="check-icon"><i class="fa-solid fa-check"></i></div>
                         <div class="service-image"><img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=500" alt="Barba"></div>
                         <div class="service-info">
                             <p class="service-name">Barba</p>
                             <span class="service-price">S/ 15</span>
                         </div>
-                    </li>
-                    <li class="service-card" onclick="toggleService(this, 'Tinte', 40)">
+                    </div>
+                    
+                    <div class="service-card" onclick="toggleService(this, 'Tinte', 40)">
                         <div class="check-icon"><i class="fa-solid fa-check"></i></div>
                         <div class="service-image"><img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=500" alt="Tinte"></div>
                         <div class="service-info">
                             <p class="service-name">Tinte</p>
                             <span class="service-price">S/ 40</span>
                         </div>
-                    </li>
-                    <li class="service-card" onclick="toggleService(this, 'Piercing', 25)">
+                    </div>
+                    
+                    <div class="service-card" onclick="toggleService(this, 'Piercing', 25)">
                         <div class="check-icon"><i class="fa-solid fa-check"></i></div>
                         <div class="service-image"><img src="https://images.unsplash.com/photo-1606909477669-02686866f874?w=500" alt="Piercing"></div>
                         <div class="service-info">
                             <p class="service-name">Piercing</p>
                             <span class="service-price">S/ 25</span>
                         </div>
-                    </li>
-                    <li class="service-card" onclick="toggleService(this, 'Tatto', 15)">
+                    </div>
+                    
+                    <div class="service-card" onclick="toggleService(this, 'Tatto', 15)">
                         <div class="check-icon"><i class="fa-solid fa-check"></i></div>
                         <div class="service-image"><img src="https://images.unsplash.com/photo-1590246261545-d814d422a592?w=500" alt="Tatto"></div>
                         <div class="service-info">
                             <p class="service-name">Tatto</p>
                             <span class="service-price">S/ 15</span>
                         </div>
-                    </li>
-                    <li class="service-card" onclick="toggleService(this, 'Ondulación', 40)">
+                    </div>
+                    
+                    <div class="service-card" onclick="toggleService(this, 'Ondulación', 40)">
                         <div class="check-icon"><i class="fa-solid fa-check"></i></div>
                         <div class="service-image"><img src="https://images.unsplash.com/photo-1599351431202-6e0c06e7d25a?w=500" alt="Ondulación"></div>
                         <div class="service-info">
                             <p class="service-name">Ondulación</p>
                             <span class="service-price">S/ 40</span>
                         </div>
-                    </li>
-                </ul>
-                <button class="nav-arrow next">▶</button>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
 
-    <section id="reserva" class="booking">
-        <div class="container">
-            <h2 class="section-title">Agenda tu Cita</h2>
-            <p class="section-subtitle">Completa tus datos para confirmar</p>
+            <div class="form-column" id="formulario-reserva">
+                <form class="booking-form">
+                    <h2 class="section-title left" style="font-size: 2rem; margin-bottom: 20px;">Agenda tu Cita</h2>
+                    
+                    <div class="form-group">
+                        <label for="day"><i class="fa-regular fa-calendar"></i> Día</label>
+                        <input type="text" id="day" placeholder="Selecciona fecha..." readonly />
+                        <div id="days-list" class="dropdown hidden"></div>
+                    </div>
 
-            <form class="booking-form">
-                <div class="form-group">
-                    <label for="day"><i class="fa-regular fa-calendar"></i> Día</label>
-                    <input type="text" id="day" placeholder="Selecciona fecha..." readonly />
-                    <div id="days-list" class="dropdown hidden"></div>
-                </div>
+                    <div class="form-group">
+                        <label for="time"><i class="fa-regular fa-clock"></i> Hora</label>
+                        <input type="text" id="time" placeholder="Selecciona hora..." readonly />
+                        <div id="hours-list" class="dropdown hidden"></div>
+                    </div>
 
-                <div class="form-group">
-                    <label for="time"><i class="fa-regular fa-clock"></i> Hora</label>
-                    <input type="text" id="time" placeholder="Selecciona hora..." readonly />
-                    <div id="hours-list" class="dropdown hidden"></div>
-                </div>
+                    <div class="form-group">
+                        <label for="name"><i class="fa-regular fa-user"></i> Nombre</label>
+                        <input type="text" id="name" placeholder="Tu nombre completo" autocomplete="off" />
+                    </div>
 
-                <div class="form-group">
-                    <label for="name"><i class="fa-regular fa-user"></i> Nombre</label>
-                    <input type="text" id="name" placeholder="Tu nombre completo" autocomplete="off" />
-                </div>
+                    <div class="form-group">
+                        <label for="whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</label>
+                        <input type="tel" id="whatsapp" placeholder="999 999 999" autocomplete="off" />
+                    </div>
 
-                <div class="form-group">
-                    <label for="whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</label>
-                    <input type="tel" id="whatsapp" placeholder="999 999 999" autocomplete="off" />
-                </div>
+                    <div class="form-group">
+                        <label for="email"><i class="fa-regular fa-envelope"></i> Correo Electrónico</label>
+                        <input type="email" id="email" placeholder="Para tu recordatorio automático" autocomplete="off" />
+                    </div>
 
-                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
-                    Confirmar Reserva
-                </button>
-            </form>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 15px;">
+                        Confirmar Reserva
+                    </button>
+                </form>
+            </div>
+            
         </div>
     </section>
 
@@ -406,7 +409,7 @@
                     <p><strong>Horario:</strong> Lunes a Sábado, 10am - 10pm</p>
                     <p><strong>Contacto:</strong> 989 435 125</p>
                     <div style="margin-top: 30px;">
-                        <a href="https://wa.me/51989435125" class="btn btn-primary"><i class="fa-brands fa-whatsapp"></i> Contactar</a>
+                        <a href="https://wa.me/51989435125" class="btn btn-primary" target="_blank"><i class="fa-brands fa-whatsapp"></i> Contactar</a>
                     </div>
                 </div>
                 <div class="map-box">
@@ -434,36 +437,50 @@
             <strong id="bar-total">S/ 0</strong>
         </div>
         <button class="bar-btn" onclick="scrollToBooking()">
-            RESERVAR <i class="fa-solid fa-chevron-down"></i>
+            RESERVAR <i class="fa-solid fa-chevron-up"></i>
         </button>
     </div>
 
     <script>
-        // === 1. CONFIGURACIÓN Y VARIABLES ===
-        const API_URL = "https://script.google.com/macros/s/AKfycbw6LiMvao5jBJLwOgS-T53bBj6GfY813ly7eWWnMxIsC27Eyvs4g3bHC3Z46I2GmgYU/exec";
+        // === 1. CONFIGURACIÓN INICIAL ===
+        const API_URL = "https://script.google.com/macros/s/AKfycbwCjVaM50sEBG0dT-LiacyqTrli4nio06tgZnW0Lt14YQa7Oxsj6Umh8_axmPz6S4CA/exec";
         
         let slots = [];
         let selectedDay = null;
-        let selectedServices = []; // Almacena {name, price}
+        let selectedServices = []; 
 
-        // Elementos del DOM
+        // Configuración de Toasts elegantes (SweetAlert2)
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3500,
+            timerProgressBar: true,
+            background: '#1c1c1c',
+            color: '#fff',
+            iconColor: '#d4af37'
+        });
+
         const form = document.querySelector(".booking-form");
         const dayInput = document.getElementById("day");
         const timeInput = document.getElementById("time");
+        const nameInput = document.getElementById("name");
+        const whatsappInput = document.getElementById("whatsapp");
+        const emailInput = document.getElementById("email");
         const daysList = document.getElementById("days-list");
         const hoursList = document.getElementById("hours-list");
         const btnSubmit = document.querySelector(".booking-form .btn-primary");
-        const nameInput = document.getElementById("name");
-        const whatsappInput = document.getElementById("whatsapp");
         const stickyBar = document.getElementById("sticky-bar");
-        const servicesList = document.querySelector(".services-list");
 
-        // === 2. INTERFAZ (Menú y Carrusel) ===
-        function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
+        // === 2. INTERFAZ Y NAVEGACIÓN ===
+        function toggleMenu() { 
+            const links = document.getElementById('navLinks');
+            if(window.innerWidth < 992) links.classList.toggle('active'); 
+        }
 
-        if(document.querySelector(".nav-arrow.next")) {
-            document.querySelector(".nav-arrow.next").addEventListener("click", () => servicesList.scrollBy({ left: 220, behavior: "smooth" }));
-            document.querySelector(".nav-arrow.prev").addEventListener("click", () => servicesList.scrollBy({ left: -220, behavior: "smooth" }));
+        window.scrollToBooking = function() {
+            document.getElementById('formulario-reserva').scrollIntoView({behavior: 'smooth', block: 'center'});
+            setTimeout(() => { if(!selectedDay) dayInput.click(); }, 600);
         }
 
         // === 3. CARGA DE DATOS (Backend) ===
@@ -475,18 +492,14 @@
         }
         loadAvailability();
 
-        // === 4. LÓGICA DE SERVICIOS (Barra Flotante) ===
-        // Esta función ahora sí existe y está conectada al HTML
+        // === 4. LÓGICA DE SERVICIOS ===
         window.toggleService = function(card, name, price) {
             card.classList.toggle('selected');
             
-            // Buscar si ya está seleccionado
             const exists = selectedServices.find(s => s.name === name);
             if(exists) {
-                // Si existe, lo quitamos
                 selectedServices = selectedServices.filter(s => s.name !== name);
             } else {
-                // Si no, lo agregamos
                 selectedServices.push({name, price});
             }
             updateStickyBar();
@@ -503,23 +516,13 @@
             else stickyBar.classList.remove('visible');
         }
 
-        window.scrollToBooking = function() {
-            document.getElementById('reserva').scrollIntoView({behavior: 'smooth'});
-            // Pequeña animación para indicar qué hacer
-            setTimeout(() => {
-                if(!selectedDay) dayInput.click();
-            }, 800);
-        }
-
-        // === 5. MANEJO DE FECHAS (Tu lógica original "que funcionaba") ===
+        // === 5. MANEJO DE FECHAS Y HORAS ===
         function formatDay(dateStr) {
             const [day, month, year] = dateStr.split("/");
-            // Truco del mediodía para evitar errores de zona horaria
             const date = new Date(year, month - 1, day, 12, 0, 0);
             return date.toLocaleDateString("es-PE", { weekday: "long", day: "numeric", month: "long" });
         }
 
-        // Mostrar Días
         dayInput.addEventListener("click", () => {
             renderDays();
             daysList.classList.toggle("hidden");
@@ -530,7 +533,6 @@
             daysList.innerHTML = "";
             const diasUnicos = [...new Set(slots.map(s => s.fecha))];
             
-            // Ordenar fechas
             diasUnicos.sort((a, b) => {
                 const [da, ma, ya] = a.split("/").map(Number);
                 const [db, mb, yb] = b.split("/").map(Number);
@@ -540,30 +542,27 @@
             diasUnicos.forEach(day => {
                 const btn = document.createElement("button");
                 btn.type = "button";
-                // Usamos la función formatDay que te funcionaba bien
                 const fechaTexto = formatDay(day);
                 btn.textContent = fechaTexto.charAt(0).toUpperCase() + fechaTexto.slice(1);
                 
                 btn.addEventListener("click", () => {
-                    selectedDay = day; // Guardamos "dd/mm/yyyy" para el backend
-                    dayInput.value = btn.textContent; // Mostramos texto bonito
+                    selectedDay = day; 
+                    dayInput.value = btn.textContent;
                     timeInput.value = "";
                     daysList.classList.add("hidden");
                     
-                    // Abrir horas automáticamente (Mejora UX)
                     setTimeout(() => {
                         renderHours(selectedDay);
                         hoursList.classList.remove("hidden");
-                    }, 200);
+                    }, 150);
                 });
                 daysList.appendChild(btn);
             });
         }
 
-        // Mostrar Horas
         timeInput.addEventListener("click", () => {
             if (!selectedDay) { 
-                Swal.fire({ icon: 'info', text: 'Primero selecciona un día', background:'#1c1c1c', color:'#fff', confirmButtonColor: '#d4af37' });
+                Toast.fire({ icon: 'info', title: 'Primero selecciona un día' });
                 return; 
             }
             renderHours(selectedDay);
@@ -575,7 +574,7 @@
             const availableHours = slots.filter(s => s.fecha === day);
 
             if (availableHours.length === 0) {
-                hoursList.innerHTML = "<p style='color:#ccc; padding:5px; font-size:0.8rem; width:100%; text-align:center'>Sin horarios</p>";
+                hoursList.innerHTML = "<p style='color:#ccc; padding:5px; font-size:0.8rem; width:100%; text-align:center'>Sin horarios libres</p>";
                 return;
             }
 
@@ -586,7 +585,6 @@
                 btn.addEventListener("click", () => {
                     timeInput.value = s.hora;
                     hoursList.classList.add("hidden");
-                    // Focus al nombre para seguir flujo
                     nameInput.focus();
                 });
                 hoursList.appendChild(btn);
@@ -597,30 +595,36 @@
         form.addEventListener("submit", e => {
             e.preventDefault();
 
-            // Validaciones
+            // Validaciones con Toasts
             if (selectedServices.length === 0) {
-                Swal.fire({ icon: 'warning', text: 'Selecciona al menos un servicio arriba.', background:'#1c1c1c', color:'#fff', confirmButtonColor: '#d4af37' });
+                Toast.fire({ icon: 'warning', title: 'Selecciona al menos un servicio' });
                 return;
             }
             if (!selectedDay || !timeInput.value) { 
-                Swal.fire({ icon: 'warning', text: 'Selecciona día y hora.', background:'#1c1c1c', color:'#fff', confirmButtonColor: '#d4af37' });
+                Toast.fire({ icon: 'warning', title: 'Selecciona día y hora' });
                 return; 
             }
             
             const nombreCliente = nameInput.value.trim();
             const wspCliente = whatsappInput.value.trim();
+            const correoCliente = emailInput.value.trim();
 
             if (nombreCliente === "") { 
-                Swal.fire({ icon: 'warning', text: 'Escribe tu nombre.', background:'#1c1c1c', color:'#fff', confirmButtonColor: '#d4af37' }).then(() => nameInput.focus());
-                return; 
+                Toast.fire({ icon: 'warning', title: 'Escribe tu nombre' });
+                nameInput.focus(); return; 
             }
             if (wspCliente.length < 9) { 
-                Swal.fire({ icon: 'warning', text: 'WhatsApp inválido.', background:'#1c1c1c', color:'#fff', confirmButtonColor: '#d4af37' }).then(() => whatsappInput.focus());
-                return; 
+                Toast.fire({ icon: 'warning', title: 'Ingresa un WhatsApp válido' });
+                whatsappInput.focus(); return; 
+            }
+            if (correoCliente === "" || !correoCliente.includes("@")) {
+                Toast.fire({ icon: 'warning', title: 'Ingresa un correo electrónico válido' });
+                emailInput.focus(); return;
             }
 
-            // Preparar Datos (Usamos los servicios del array selectedServices)
+            // Preparar Datos para el Backend (NUEVO: Monto y Email)
             const serviciosNames = selectedServices.map(s => s.name).join(", ");
+            const montoTotal = selectedServices.reduce((sum, item) => sum + item.price, 0);
             
             const originalBtnText = btnSubmit.innerHTML;
             btnSubmit.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Procesando...';
@@ -631,7 +635,9 @@
                 hora: timeInput.value,
                 nombre: nombreCliente,
                 whatsapp: wspCliente,
-                servicios: serviciosNames
+                email: correoCliente,
+                servicios: serviciosNames,
+                monto: montoTotal
             };
 
             fetch(API_URL, {
@@ -642,17 +648,13 @@
             .then(res => res.json())
             .then(response => {
                 if (response.status === "success") {
-                    const mensajeWsp = `Hola Cover 97, soy ${nombreCliente}. Reserva: ${dayInput.value} a las ${timeInput.value}. Servicios: ${serviciosNames}.`;
+                    const mensajeWsp = `Hola Cover 97, soy ${nombreCliente}. He reservado el día ${dayInput.value} a las ${timeInput.value}. Servicios: ${serviciosNames}. Total: S/${montoTotal}.`;
                     const tuNumeroNegocio = "51989435125"; 
                     const urlWsp = `https://wa.me/${tuNumeroNegocio}?text=${encodeURIComponent(mensajeWsp)}`;
 
                     window.open(urlWsp, "_blank");
 
-                    Swal.fire({
-                        icon: 'success', title: '¡Reserva Enviada!', text: 'Redirigiendo a WhatsApp...',
-                        timer: 3000, timerProgressBar: true, showConfirmButton: false,
-                        background: '#1c1c1c', color: '#fff'
-                    });
+                    Toast.fire({ icon: 'success', title: '¡Reserva Confirmada!' });
 
                     // Limpieza total
                     form.reset();
@@ -663,12 +665,12 @@
                     loadAvailability();
 
                 } else {
-                    Swal.fire({ icon: 'error', text: response.message, background:'#1c1c1c', color:'#fff', confirmButtonColor: '#d33' });
+                    Toast.fire({ icon: 'error', title: response.message });
                 }
             })
             .catch(err => {
                 console.error(err);
-                Swal.fire({ icon: 'error', text: 'Error de conexión.', background:'#1c1c1c', color:'#fff', confirmButtonColor: '#d33' });
+                Toast.fire({ icon: 'error', title: 'Error de conexión. Intenta nuevamente.' });
             })
             .finally(() => {
                 btnSubmit.innerHTML = originalBtnText;
